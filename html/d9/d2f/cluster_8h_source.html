@@ -105,34 +105,54 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00006"></a>00006 <span class="keyword">using namespace </span>std;
 <a name="l00007"></a>00007 <span class="keyword">using namespace </span>std::tr1;
 <a name="l00008"></a>00008 
-<a name="l00023"></a>00023 <span class="keyword">class </span><a class="code" href="../../df/dd0/classNode.html">Node</a>; <span class="comment">// Forward declaration of Node class</span>
-<a name="l00024"></a>00024 
-<a name="l00025"></a><a class="code" href="../../d4/dbe/classCluster.html">00025</a> <span class="keyword">class </span><a class="code" href="../../d4/dbe/classCluster.html">Cluster</a>
-<a name="l00026"></a>00026 {
-<a name="l00027"></a>00027     <span class="keyword">private</span>:
-<a name="l00028"></a>00028 
-<a name="l00029"></a>00029         <span class="keywordtype">int</span> id_;                            <span class="comment">// Unique identifier</span>
-<a name="l00030"></a>00030         vector&lt;shared_ptr&lt;Node&gt; &gt; members_; <span class="comment">/* A vector contaning all the</span>
-<a name="l00031"></a>00031 <span class="comment">                                               elements in this cluster */</span>
-<a name="l00032"></a>00032         <span class="keywordtype">float</span> maxDistance_;                <span class="comment">/* The maximum distance between</span>
-<a name="l00033"></a>00033 <span class="comment">                                               members of this cluster */</span>
-<a name="l00034"></a>00034 
-<a name="l00035"></a>00035     <span class="keyword">public</span>:
-<a name="l00036"></a>00036 
-<a name="l00044"></a><a class="code" href="../../d4/dbe/classCluster.html#a991344d034e786ff0a9a7cc2af568718">00044</a>         <a class="code" href="../../d4/dbe/classCluster.html">Cluster</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>, vector&lt;shared_ptr&lt;Node&gt; &gt; &amp;members,
-<a name="l00045"></a>00045                 <span class="keywordtype">float</span> maxDistance) : id_(id),members_(members),
-<a name="l00046"></a>00046                 maxDistance_(maxDistance) {}
-<a name="l00047"></a>00047 
-<a name="l00052"></a><a class="code" href="../../d4/dbe/classCluster.html#aeec0e9ff8d23481cbf51a69eb1677ac9">00052</a>         <span class="keywordtype">int</span> <a class="code" href="../../d4/dbe/classCluster.html#aeec0e9ff8d23481cbf51a69eb1677ac9">getID</a>(){<span class="keywordflow">return</span> id_;};
-<a name="l00053"></a>00053 
-<a name="l00058"></a><a class="code" href="../../d4/dbe/classCluster.html#a61d4c3cd94323795961dcdfd5520f20a">00058</a>         vector&lt;shared_ptr&lt;Node&gt; &gt; <a class="code" href="../../d4/dbe/classCluster.html#a61d4c3cd94323795961dcdfd5520f20a">getMembers</a>(){<span class="keywordflow">return</span> members_;};
-<a name="l00059"></a>00059 
-<a name="l00064"></a><a class="code" href="../../d4/dbe/classCluster.html#ab882f23f5cb019e0b02a1ab44d6eea58">00064</a>         <span class="keywordtype">float</span> <a class="code" href="../../d4/dbe/classCluster.html#ab882f23f5cb019e0b02a1ab44d6eea58">getMaxDistance</a>(){<span class="keywordflow">return</span> maxDistance_;};
-<a name="l00065"></a>00065 
-<a name="l00070"></a><a class="code" href="../../d4/dbe/classCluster.html#ae491147fb48704715f2d08760fd587d1">00070</a>         <span class="keywordtype">void</span> <a class="code" href="../../d4/dbe/classCluster.html#ae491147fb48704715f2d08760fd587d1">setMaxDistance</a>(<span class="keywordtype">float</span> maxDistance){maxDistance_=maxDistance;};
-<a name="l00071"></a>00071 };
+<a name="l00026"></a>00026 <span class="keyword">class </span><a class="code" href="../../df/dd0/classNode.html">Node</a>; <span class="comment">// Forward declaration of Node class</span>
+<a name="l00027"></a>00027 
+<a name="l00028"></a><a class="code" href="../../d4/dbe/classCluster.html">00028</a> <span class="keyword">class </span><a class="code" href="../../d4/dbe/classCluster.html">Cluster</a>
+<a name="l00029"></a>00029 {
+<a name="l00030"></a>00030     <span class="keyword">private</span>:
+<a name="l00031"></a>00031 
+<a name="l00032"></a>00032         <span class="keywordtype">int</span> id_;                            <span class="comment">// Unique identifier</span>
+<a name="l00033"></a>00033         vector&lt;shared_ptr&lt;Node&gt; &gt; members_; <span class="comment">/* A vector contaning all the</span>
+<a name="l00034"></a>00034 <span class="comment">                                               elements in this cluster */</span>
+<a name="l00035"></a>00035         <span class="keywordtype">float</span> maxDistance_;                <span class="comment">/* The maximum distance between</span>
+<a name="l00036"></a>00036 <span class="comment">                                               members of this cluster */</span>
+<a name="l00037"></a>00037         shared_ptr&lt;Node&gt; centroid_;         <span class="comment">// Member with smallest distance</span>
+<a name="l00038"></a>00038                                             <span class="comment">// to all other members (sum)</span>
+<a name="l00039"></a>00039         <span class="keywordtype">float</span> radius_;                      <span class="comment">// largest distance from the</span>
+<a name="l00040"></a>00040                                             <span class="comment">// centroid to a member</span>
+<a name="l00041"></a>00041         <span class="keywordtype">bool</span> active_;
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043     <span class="keyword">public</span>:
+<a name="l00044"></a>00044 
+<a name="l00052"></a><a class="code" href="../../d4/dbe/classCluster.html#a991344d034e786ff0a9a7cc2af568718">00052</a>         <a class="code" href="../../d4/dbe/classCluster.html">Cluster</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>, vector&lt;shared_ptr&lt;Node&gt; &gt; &amp;members,
+<a name="l00053"></a>00053                 <span class="keywordtype">float</span> maxDistance) : id_(id),members_(members),
+<a name="l00054"></a>00054                 maxDistance_(maxDistance)
+<a name="l00055"></a>00055                 {
+<a name="l00056"></a>00056                     centroid_=members_[0];
+<a name="l00057"></a>00057                     radius_=0;
+<a name="l00058"></a>00058                     active_=<span class="keyword">true</span>;
+<a name="l00059"></a>00059                 }
+<a name="l00060"></a>00060 
+<a name="l00065"></a><a class="code" href="../../d4/dbe/classCluster.html#aeec0e9ff8d23481cbf51a69eb1677ac9">00065</a>         <span class="keywordtype">int</span> <a class="code" href="../../d4/dbe/classCluster.html#aeec0e9ff8d23481cbf51a69eb1677ac9">getID</a>(){<span class="keywordflow">return</span> id_;};
+<a name="l00066"></a>00066 
+<a name="l00071"></a><a class="code" href="../../d4/dbe/classCluster.html#a61d4c3cd94323795961dcdfd5520f20a">00071</a>         vector&lt;shared_ptr&lt;Node&gt; &gt; <a class="code" href="../../d4/dbe/classCluster.html#a61d4c3cd94323795961dcdfd5520f20a">getMembers</a>(){<span class="keywordflow">return</span> members_;};
 <a name="l00072"></a>00072 
-<a name="l00073"></a>00073 <span class="preprocessor">#endif</span>
+<a name="l00077"></a><a class="code" href="../../d4/dbe/classCluster.html#ab882f23f5cb019e0b02a1ab44d6eea58">00077</a>         <span class="keywordtype">float</span> <a class="code" href="../../d4/dbe/classCluster.html#ab882f23f5cb019e0b02a1ab44d6eea58">getMaxDistance</a>(){<span class="keywordflow">return</span> maxDistance_;};
+<a name="l00078"></a>00078 
+<a name="l00083"></a><a class="code" href="../../d4/dbe/classCluster.html#ae491147fb48704715f2d08760fd587d1">00083</a>         <span class="keywordtype">void</span> <a class="code" href="../../d4/dbe/classCluster.html#ae491147fb48704715f2d08760fd587d1">setMaxDistance</a>(<span class="keywordtype">float</span> maxDistance){maxDistance_=maxDistance;};
+<a name="l00084"></a>00084 
+<a name="l00093"></a>00093         <span class="keywordtype">void</span> calcCentroid(vector&lt; vector&lt;float&gt; &gt; normScores);
+<a name="l00094"></a>00094 
+<a name="l00099"></a><a class="code" href="../../d4/dbe/classCluster.html#abcb630832b9df2639e4d12ab0df23d99">00099</a>         shared_ptr&lt;Node&gt; <a class="code" href="../../d4/dbe/classCluster.html#abcb630832b9df2639e4d12ab0df23d99">getCentroid</a>(){<span class="keywordflow">return</span> centroid_;};
+<a name="l00100"></a>00100 
+<a name="l00106"></a><a class="code" href="../../d4/dbe/classCluster.html#a286358c9ee1e44c218c5bccb0792e337">00106</a>         <span class="keywordtype">float</span> <a class="code" href="../../d4/dbe/classCluster.html#a286358c9ee1e44c218c5bccb0792e337">getRadius</a>(){<span class="keywordflow">return</span> radius_;};
+<a name="l00107"></a>00107 
+<a name="l00112"></a><a class="code" href="../../d4/dbe/classCluster.html#a5761c2a07d9a41d03957dba0ce026200">00112</a>         <span class="keywordtype">void</span> <a class="code" href="../../d4/dbe/classCluster.html#a5761c2a07d9a41d03957dba0ce026200">setStatus</a>(){active_=!active_;};
+<a name="l00113"></a>00113 
+<a name="l00120"></a><a class="code" href="../../d4/dbe/classCluster.html#a790a2c7b3a9ec4802b7279f7d0c3ff8d">00120</a>         <span class="keywordtype">bool</span> <a class="code" href="../../d4/dbe/classCluster.html#a790a2c7b3a9ec4802b7279f7d0c3ff8d">getStatus</a>(){<span class="keywordflow">return</span> active_;};
+<a name="l00121"></a>00121 };
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 </div>
 <!-- window showing the filter options -->
@@ -153,7 +173,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
     <ul>
       <li class="navelem"><a class="el" href="../../d9/d2f/cluster_8h.html">cluster.h</a>      </li>
 
-    <li class="footer">Generated on Thu Nov 27 2014 17:19:29 for Hierarchical Clustering by
+    <li class="footer">Generated on Sun Nov 30 2014 15:13:43 for Hierarchical Clustering by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

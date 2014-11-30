@@ -4,5 +4,7 @@ digraph G
   node [fontname="Helvetica",fontsize="10",shape=record];
   Node1 [label="node.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="main.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$df/d0a/main_8cpp.html",tooltip="Contains the main program."];
+  Node2 [label="cluster.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$db/d0d/cluster_8cpp.html",tooltip="Implementation of methods for Cluster class."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="main.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$df/d0a/main_8cpp.html",tooltip="Contains the main program."];
 }

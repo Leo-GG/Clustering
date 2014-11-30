@@ -13,7 +13,7 @@
  *                the cutoff</p>
  *
  * @author Leonardo Garma
- * @version 0.1 27/11/2014
+ * @version 0.1.2 27/11/2014
  */
 
 /**
@@ -32,7 +32,6 @@
 #include <queue>
 #include <cmath>       /* sqrt */
 #include <tr1/memory>
-#include "input.h"
 #include "node.h"
 #include "cluster.h"
 #include "link.h"
@@ -78,20 +77,30 @@ void initNodesAndClusters (int totalNodes, vector< shared_ptr<Node> > &nodeList,
                             int &totalClusters);
 
 /**
- * Creates Links between all the Nodes in the nodeList. For every two nodes
- * A and B, it computes the geometrical average of the distance A-B and B-A
- * and adds it to the normScores vector. Then it generates a Link between A
- * and B using the normalized distance.
+ * Normalize the rawScores by computing harmonic average between reciprocal
+ * scores or distances.
+ * normScore=2*rawScore(A)*rawScore(B)/(rawScore(A)+rawScore(B))
+ * Results in a score matrix, represented as a vector of vector of floats
+ * @param totalNodes Total number of nodes, determines the size of the matrix
+ * @param rawScores The distances taken from the input file
+ * @param normScores Vector of vectors representing a normalized matrix of
+ *                  distances between nodes
+ */
+void initScores(int totalNodes,vector<float> rawScores,
+                vector< vector<float> > &normScores);
+
+/**
+ * Creates Links between each pair of nodes on the nodeList using the
+ * normalized distance from the normScores matrix.
  * @param totalNodes Total number of nodes on the nodeList
- * @param normScores Matrix (vector of vector of floats) containing the
- *                  normalized distances between Nodes
+ * @param normScores Vector of vectors representing a normalized matrix of
+ *                  distances between nodes
  * @param linkList Priority Queue that holds the Links in increasing order of
  *                distance
  * @param nodeList Vector of shared pointers to the Nodes
  */
-void initLinks (int totalNodes, vector<float> rawScores,
-                vector< vector<float> > &normScores, priority_queue<Link,
-                vector<Link>, LinkComparator> &linkList,
+void initLinks (int totalNodes, vector< vector<float> > normScores,
+                priority_queue<Link, vector<Link>, LinkComparator> &linkList,
                 vector< shared_ptr<Node> > nodeList);
 /**
  * Goes through all the Links in linkList and whenever two elements are not in
@@ -133,16 +142,26 @@ int main()
     priority_queue<Link,vector<Link>,LinkComparator> linkList;
     vector<shared_ptr<Cluster> > clusterList;
 
-    string inpFile = "Kd";      // Name of the file with the list of pairwise
+    /** User input parameters **/
+    string inpFile = "TMData";      // Name of the file with the list of pairwise
                                 // distances
-    float cutoff = 20.0;       // Distance cutoff
+
+    float cutoff = (1-0.5908);       // Distance cutoff TM
+    //float cutoff = 0.23157;          // Distance cutoff ProBis
+    //float cutoff = 0.04621;       // Distance cutoff CLICK
+    //float cutoff = 0.092;       // Distance cutoff Triangle
+    //float cutoff = (1-0.7214);      //Dsitance cutoff SE
+
+    /** Clustering process **/
     readInput (inpFile, totalNodes, rawScores);
 
     initNodesAndClusters (totalNodes, nodeList,        // Initialize the lists
                           clusterList, totalClusters); // of Nodes and Clusters
 
-    initLinks (totalNodes, rawScores,                   // Initialize the list
-               normScores, linkList, nodeList);         // of Links
+    initScores (totalNodes,rawScores,normScores);
+
+    initLinks (totalNodes, normScores,                  // Initialize the list
+               linkList, nodeList);                     // of Links
 
    // doClustering(linkList, clusterList, totalClusters); // Perform clustering
                                                         // using all the links
@@ -151,20 +170,27 @@ int main()
                        totalClusters,cutoff);           // clustering with
                                                         // cutoff
 
-
+    /** Output generation **/
+    int activeClusters=0;
     for (int i=0; i< clusterList.size();i++)
     {
-        printf("Cluster %d :", clusterList[i]->getID());
-        vector<shared_ptr<Node> > nodes = clusterList[i]->getMembers();
-        for (int j=0;j<nodes.size();j++)
+        if (clusterList[i]->getStatus())
         {
-
-            printf(" %d", nodes[j]->getID());
+            activeClusters++;
+            printf("Cluster %d : ", clusterList[i]->getID());
+            clusterList[i]->calcCentroid(normScores);
+            printf("clustroid %d, ", clusterList[i]->getCentroid()->getID());
+            printf("radius %f ", (1-clusterList[i]->getRadius()));
+            vector<shared_ptr<Node> > nodes = clusterList[i]->getMembers();
+            printf("members %d ", nodes.size());
+//            for (int j=0;j<nodes.size();j++)
+//            {
+//                printf("%d ", nodes[j]->getID());
+//            }
+            printf(", minSimilarity %f\n",(1-clusterList[i]->getMaxDistance()));
         }
-        printf(", maxDistance %f\n",clusterList[i]->getMaxDistance());
-
     }
-
+    printf("Total number of clusters: %d \n",activeClusters);
 
     return 0;
 }
@@ -179,19 +205,20 @@ void readInput (string inpFile, int &totalNodes, vector<float> &rawScores)
     int line=0;
         while(getline(infile,STRING))     // Read through all the lines
         {
-	        printf("%s",STRING.c_str());  // Prints our STRING
+	  //      printf("%s",STRING.c_str());  // Prints our STRING
 	        vector<string> strs;          // Vector to hold words in the line
             boost::split(strs, STRING,
                          boost::is_any_of("\t+ ")); // Split the line
-            inputScore=atof(strs[2].c_str());       // Read the string with the
-                                                    // score as a float
-            printf (" %f\n",inputScore);
+            inputScore=( 1 -
+                        atof(strs[2].c_str()) );// Read the string with the
+                                                // score as a float
+     //       printf (" %f\n",inputScore);
             rawScores.push_back(inputScore);
             line++;
         }
 	infile.close();
 
-	printf("total Lines %d total Nodes %d\n",line,(int)sqrt((double)line));
+	//printf("total Lines %d total Nodes %d\n",line,(int)sqrt((double)line));
     totalNodes=(int)sqrt((double)line);
 }
 
@@ -216,39 +243,42 @@ void initNodesAndClusters (int totalNodes,
     }
 }
 
-void initLinks (int totalNodes, vector<float> rawScores,
-                vector< vector<float> > &normScores, priority_queue<Link,
-                vector<Link>,LinkComparator> &linkList,
+void initScores(int totalNodes,vector<float> rawScores,
+                vector< vector<float> > &normScores)
+{
+    float score;
+    for (int i=0; i <(totalNodes); i++)
+    {
+        vector <float> row;
+        for (int j=0;j<totalNodes;j++)
+        {
+                if (i==j ||
+                    rawScores[i*totalNodes+j]==0 ||
+                    rawScores[j*totalNodes+i]==0 ) score=0;
+                else
+                {
+                    score = 2*
+                    (rawScores[i*totalNodes+j]*rawScores[j*totalNodes+i])/
+                    (rawScores[i*totalNodes+j]+rawScores[j*totalNodes+i]);
+                }
+                row.push_back(score);
+        }
+        normScores.push_back(row);
+    }
+}
+
+void initLinks (int totalNodes, vector< vector<float> > normScores,
+                priority_queue<Link, vector<Link>, LinkComparator> &linkList,
                 vector< shared_ptr<Node> > nodeList)
 {
     for (int i=0; i <(totalNodes-1); i++)
     {
-        vector <float> row;
         for (int j=i+1;j<totalNodes;j++)
         {
-            float score;
-            if ( (rawScores[i*totalNodes+j]==0) ||
-                (rawScores[j*totalNodes+i]==0) ) // If any of the comparisons
-                                                 // has perfect scores, assign
-                                                 // maximum score
-            {
-                score=0;
-            }
-            else
-            {
-                score=2*(rawScores[i*totalNodes+j]*rawScores[j*totalNodes+i])/
-                        (rawScores[i*totalNodes+j]+rawScores[j*totalNodes+i]);
-
-            }
-            printf ("i %d j %d score %f\n",i,j,score);
-            row.push_back(score);
-            linkList.push(Link(nodeList[i],nodeList[j],score));
+            linkList.push(Link(nodeList[i],nodeList[j],normScores[i][j]));
         }
-        normScores.push_back(row);
-
     }
 }
-
 
 void doClusteringCutoff(priority_queue<Link,vector<Link>,
                         LinkComparator> &linkList,
@@ -337,7 +367,8 @@ shared_ptr<Cluster> mergeClusters(shared_ptr<Cluster> A,shared_ptr<Cluster> B,
             node->setCluster(nextCluster);
         }
 
-        //return clusterMembers;
+        A->setStatus();
+        B->setStatus();
         shared_ptr<Cluster> C (new Cluster(nextCluster,clusterMembers,
                                            maxDistance));
         return C;

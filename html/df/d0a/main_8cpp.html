@@ -110,7 +110,6 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <code>#include &lt;queue&gt;</code><br/>
 <code>#include &lt;cmath&gt;</code><br/>
 <code>#include &lt;tr1/memory&gt;</code><br/>
-<code>#include &quot;input.h&quot;</code><br/>
 <code>#include &quot;<a class="el" href="../../d1/d77/node_8h_source.html">node.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="../../d9/d2f/cluster_8h_source.html">cluster.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="../../d4/d3c/link_8h_source.html">link.h</a>&quot;</code><br/>
@@ -128,11 +127,11 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">shared_ptr&lt; <a class="el" href="../../d4/dbe/classCluster.html">Cluster</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d0a/main_8cpp.html#acf8033c2fa1e7f31e2612bcc39c9b6ea">mergeClusters</a> (shared_ptr&lt; <a class="el" href="../../d4/dbe/classCluster.html">Cluster</a> &gt; A, shared_ptr&lt; <a class="el" href="../../d4/dbe/classCluster.html">Cluster</a> &gt; B, int nextCluster, float maxDistance)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d0a/main_8cpp.html#ac1a1ccec83a94c4315d451e1fa85153a">readInput</a> (string inpFile, int &amp;totalNodes, vector&lt; float &gt; &amp;rawScores)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d0a/main_8cpp.html#a8384746f4a83fa281f22b7fda3a48097">initNodesAndClusters</a> (int totalNodes, vector&lt; shared_ptr&lt; <a class="el" href="../../df/dd0/classNode.html">Node</a> &gt; &gt; &amp;nodeList, vector&lt; shared_ptr&lt; <a class="el" href="../../d4/dbe/classCluster.html">Cluster</a> &gt; &gt; &amp;clusterList, int &amp;totalClusters)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d0a/main_8cpp.html#aee8ae040723bd843d16dc4bc900aee99">initLinks</a> (int totalNodes, vector&lt; float &gt; rawScores, vector&lt; vector&lt; float &gt; &gt; &amp;normScores, priority_queue&lt; <a class="el" href="../../d5/d19/classLink.html">Link</a>, vector&lt; <a class="el" href="../../d5/d19/classLink.html">Link</a> &gt;, <a class="el" href="../../dc/d48/classLinkComparator.html">LinkComparator</a> &gt; &amp;linkList, vector&lt; shared_ptr&lt; <a class="el" href="../../df/dd0/classNode.html">Node</a> &gt; &gt; nodeList)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d0a/main_8cpp.html#aa888ea2146294a20cf4587d77367b5bf">initScores</a> (int totalNodes, vector&lt; float &gt; rawScores, vector&lt; vector&lt; float &gt; &gt; &amp;normScores)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d0a/main_8cpp.html#a268a8ffcfa7afcb044e099f239ef2ad2">initLinks</a> (int totalNodes, vector&lt; vector&lt; float &gt; &gt; normScores, priority_queue&lt; <a class="el" href="../../d5/d19/classLink.html">Link</a>, vector&lt; <a class="el" href="../../d5/d19/classLink.html">Link</a> &gt;, <a class="el" href="../../dc/d48/classLinkComparator.html">LinkComparator</a> &gt; &amp;linkList, vector&lt; shared_ptr&lt; <a class="el" href="../../df/dd0/classNode.html">Node</a> &gt; &gt; nodeList)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d0a/main_8cpp.html#a880232b566ecbb52a04f03e5bd9773aa">doClustering</a> (priority_queue&lt; <a class="el" href="../../d5/d19/classLink.html">Link</a>, vector&lt; <a class="el" href="../../d5/d19/classLink.html">Link</a> &gt;, <a class="el" href="../../dc/d48/classLinkComparator.html">LinkComparator</a> &gt; &amp;linkList, vector&lt; shared_ptr&lt; <a class="el" href="../../d4/dbe/classCluster.html">Cluster</a> &gt; &gt; &amp;clusterList, int totalClusters)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d0a/main_8cpp.html#ac32c8861b506d99f8ada5f3b1af66753">doClusteringCutoff</a> (priority_queue&lt; <a class="el" href="../../d5/d19/classLink.html">Link</a>, vector&lt; <a class="el" href="../../d5/d19/classLink.html">Link</a> &gt;, <a class="el" href="../../dc/d48/classLinkComparator.html">LinkComparator</a> &gt; &amp;linkList, vector&lt; shared_ptr&lt; <a class="el" href="../../d4/dbe/classCluster.html">Cluster</a> &gt; &gt; &amp;clusterList, int totalClusters, float cutoff)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a><!-- doxytag: member="main.cpp::main" ref="ae66f6b31b5ad750f1fe042a706a4e3d4" args="()" -->
-int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d0a/main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Contains the main program. </p>
@@ -245,14 +244,23 @@ Here is the call graph for this function:</div>
 </div>
 </p>
 
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../df/d0a/main_8cpp_ac32c8861b506d99f8ada5f3b1af66753_icgraph.png" border="0" usemap="#df/d0a/main_8cpp_ac32c8861b506d99f8ada5f3b1af66753_icgraph" alt=""/></div>
+<map name="df/d0a/main_8cpp_ac32c8861b506d99f8ada5f3b1af66753_icgraph" id="df/d0a/main_8cpp_ac32c8861b506d99f8ada5f3b1af66753_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
-<a class="anchor" id="aee8ae040723bd843d16dc4bc900aee99"></a><!-- doxytag: member="main.cpp::initLinks" ref="aee8ae040723bd843d16dc4bc900aee99" args="(int totalNodes, vector&lt; float &gt; rawScores, vector&lt; vector&lt; float &gt; &gt; &amp;normScores, priority_queue&lt; Link, vector&lt; Link &gt;, LinkComparator &gt; &amp;linkList, vector&lt; shared_ptr&lt; Node &gt; &gt; nodeList)" -->
+<a class="anchor" id="a268a8ffcfa7afcb044e099f239ef2ad2"></a><!-- doxytag: member="main.cpp::initLinks" ref="a268a8ffcfa7afcb044e099f239ef2ad2" args="(int totalNodes, vector&lt; vector&lt; float &gt; &gt; normScores, priority_queue&lt; Link, vector&lt; Link &gt;, LinkComparator &gt; &amp;linkList, vector&lt; shared_ptr&lt; Node &gt; &gt; nodeList)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="../../df/d0a/main_8cpp.html#aee8ae040723bd843d16dc4bc900aee99">initLinks</a> </td>
+          <td class="memname">void <a class="el" href="../../df/d0a/main_8cpp.html#a268a8ffcfa7afcb044e099f239ef2ad2">initLinks</a> </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>totalNodes</em>, </td>
@@ -260,13 +268,7 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">vector&lt; float &gt;&#160;</td>
-          <td class="paramname"><em>rawScores</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">vector&lt; vector&lt; float &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">vector&lt; vector&lt; float &gt; &gt;&#160;</td>
           <td class="paramname"><em>normScores</em>, </td>
         </tr>
         <tr>
@@ -289,16 +291,25 @@ Here is the call graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<p>Creates Links between all the Nodes in the nodeList. For every two nodes A and B, it computes the geometrical average of the distance A-B and B-A and adds it to the normScores vector. Then it generates a <a class="el" href="../../d5/d19/classLink.html">Link</a> between A and B using the normalized distance. </p>
+<p>Creates Links between each pair of nodes on the nodeList using the normalized distance from the normScores matrix. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">totalNodes</td><td>Total number of nodes on the nodeList </td></tr>
-    <tr><td class="paramname">normScores</td><td>Matrix (vector of vector of floats) containing the normalized distances between Nodes </td></tr>
+    <tr><td class="paramname">normScores</td><td>Vector of vectors representing a normalized matrix of distances between nodes </td></tr>
     <tr><td class="paramname">linkList</td><td>Priority Queue that holds the Links in increasing order of distance </td></tr>
     <tr><td class="paramname">nodeList</td><td>Vector of shared pointers to the Nodes </td></tr>
   </table>
   </dd>
 </dl>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../df/d0a/main_8cpp_a268a8ffcfa7afcb044e099f239ef2ad2_icgraph.png" border="0" usemap="#df/d0a/main_8cpp_a268a8ffcfa7afcb044e099f239ef2ad2_icgraph" alt=""/></div>
+<map name="df/d0a/main_8cpp_a268a8ffcfa7afcb044e099f239ef2ad2_icgraph" id="df/d0a/main_8cpp_a268a8ffcfa7afcb044e099f239ef2ad2_icgraph">
+</map>
+</div>
+</p>
 
 </div>
 </div>
@@ -347,6 +358,94 @@ Here is the call graph for this function:</div>
   </table>
   </dd>
 </dl>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../df/d0a/main_8cpp_a8384746f4a83fa281f22b7fda3a48097_icgraph.png" border="0" usemap="#df/d0a/main_8cpp_a8384746f4a83fa281f22b7fda3a48097_icgraph" alt=""/></div>
+<map name="df/d0a/main_8cpp_a8384746f4a83fa281f22b7fda3a48097_icgraph" id="df/d0a/main_8cpp_a8384746f4a83fa281f22b7fda3a48097_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="aa888ea2146294a20cf4587d77367b5bf"></a><!-- doxytag: member="main.cpp::initScores" ref="aa888ea2146294a20cf4587d77367b5bf" args="(int totalNodes, vector&lt; float &gt; rawScores, vector&lt; vector&lt; float &gt; &gt; &amp;normScores)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="../../df/d0a/main_8cpp.html#aa888ea2146294a20cf4587d77367b5bf">initScores</a> </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>totalNodes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&lt; float &gt;&#160;</td>
+          <td class="paramname"><em>rawScores</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&lt; vector&lt; float &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>normScores</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Normalize the rawScores by computing harmonic average between reciprocal scores or distances. normScore=2*rawScore(A)*rawScore(B)/(rawScore(A)+rawScore(B)) Results in a score matrix, represented as a vector of vector of floats </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">totalNodes</td><td>Total number of nodes, determines the size of the matrix </td></tr>
+    <tr><td class="paramname">rawScores</td><td>The distances taken from the input file </td></tr>
+    <tr><td class="paramname">normScores</td><td>Vector of vectors representing a normalized matrix of distances between nodes </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../df/d0a/main_8cpp_aa888ea2146294a20cf4587d77367b5bf_icgraph.png" border="0" usemap="#df/d0a/main_8cpp_aa888ea2146294a20cf4587d77367b5bf_icgraph" alt=""/></div>
+<map name="df/d0a/main_8cpp_aa888ea2146294a20cf4587d77367b5bf_icgraph" id="df/d0a/main_8cpp_aa888ea2146294a20cf4587d77367b5bf_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a><!-- doxytag: member="main.cpp::main" ref="ae66f6b31b5ad750f1fe042a706a4e3d4" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="../../df/d0a/main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>User input parameters</p>
+<p>Clustering process</p>
+<p>Output generation </p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../df/d0a/main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph.png" border="0" usemap="#df/d0a/main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph" alt=""/></div>
+<map name="df/d0a/main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph" id="df/d0a/main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph">
+</map>
+</div>
+</p>
 
 </div>
 </div>
@@ -449,6 +548,15 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../df/d0a/main_8cpp_ac1a1ccec83a94c4315d451e1fa85153a_icgraph.png" border="0" usemap="#df/d0a/main_8cpp_ac1a1ccec83a94c4315d451e1fa85153a_icgraph" alt=""/></div>
+<map name="df/d0a/main_8cpp_ac1a1ccec83a94c4315d451e1fa85153a_icgraph" id="df/d0a/main_8cpp_ac1a1ccec83a94c4315d451e1fa85153a_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 </div><!-- contents -->
@@ -471,7 +579,7 @@ Here is the caller graph for this function:</div>
     <ul>
       <li class="navelem"><a class="el" href="../../df/d0a/main_8cpp.html">main.cpp</a>      </li>
 
-    <li class="footer">Generated on Thu Nov 27 2014 17:19:30 for Hierarchical Clustering by
+    <li class="footer">Generated on Sun Nov 30 2014 15:13:44 for Hierarchical Clustering by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

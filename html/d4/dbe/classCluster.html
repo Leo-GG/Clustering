@@ -112,9 +112,14 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">vector&lt; shared_ptr&lt; <a class="el" href="../../df/dd0/classNode.html">Node</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dbe/classCluster.html#a61d4c3cd94323795961dcdfd5520f20a">getMembers</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dbe/classCluster.html#ab882f23f5cb019e0b02a1ab44d6eea58">getMaxDistance</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dbe/classCluster.html#ae491147fb48704715f2d08760fd587d1">setMaxDistance</a> (float maxDistance)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dbe/classCluster.html#a92be492869dbae028602a8749e6136ba">calcCentroid</a> (vector&lt; vector&lt; float &gt; &gt; normScores)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">shared_ptr&lt; <a class="el" href="../../df/dd0/classNode.html">Node</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dbe/classCluster.html#abcb630832b9df2639e4d12ab0df23d99">getCentroid</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dbe/classCluster.html#a286358c9ee1e44c218c5bccb0792e337">getRadius</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dbe/classCluster.html#a5761c2a07d9a41d03957dba0ce026200">setStatus</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dbe/classCluster.html#a790a2c7b3a9ec4802b7279f7d0c3ff8d">getStatus</a> ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Represents each cluster generated in the process. It holds a cluster identifier, a pointer to a vector of members and the maximum distance within the cluster </p>
+<div class="textblock"><p>Represents each cluster generated in the process. It holds a cluster identifier, a pointer to a vector of members, the maximum distance within members of the cluster, the cluster centroid (member with smallest total distance to other members), the cluster radius and a boolean flag that indicates whether or not the cluster has been merged into a posterior cluster. </p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a991344d034e786ff0a9a7cc2af568718"></a><!-- doxytag: member="Cluster::Cluster" ref="a991344d034e786ff0a9a7cc2af568718" args="(int id, vector&lt; shared_ptr&lt; Node &gt; &gt; &amp;members, float maxDistance)" -->
 <div class="memitem">
@@ -159,6 +164,48 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a92be492869dbae028602a8749e6136ba"></a><!-- doxytag: member="Cluster::calcCentroid" ref="a92be492869dbae028602a8749e6136ba" args="(vector&lt; vector&lt; float &gt; &gt; normScores)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="../../d4/dbe/classCluster.html#a92be492869dbae028602a8749e6136ba">Cluster::calcCentroid</a> </td>
+          <td>(</td>
+          <td class="paramtype">vector&lt; vector&lt; float &gt; &gt;&#160;</td>
+          <td class="paramname"><em>normScores</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Calculates the cluster centroid as the member whose sum of distances to all other members is the smallest. It assigns the value of the cluster radius (from centroid) in the process </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">normScores</td><td>A distance matrix with all the normalized distances between members </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="abcb630832b9df2639e4d12ab0df23d99"></a><!-- doxytag: member="Cluster::getCentroid" ref="abcb630832b9df2639e4d12ab0df23d99" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">shared_ptr&lt;<a class="el" href="../../df/dd0/classNode.html">Node</a>&gt; <a class="el" href="../../d4/dbe/classCluster.html#abcb630832b9df2639e4d12ab0df23d99">Cluster::getCentroid</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Returns a shared pointer to the cluster centroid </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>centroid A shared pointer to the centroid <a class="el" href="../../df/dd0/classNode.html">Node</a> </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="aeec0e9ff8d23481cbf51a69eb1677ac9"></a><!-- doxytag: member="Cluster::getID" ref="aeec0e9ff8d23481cbf51a69eb1677ac9" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -213,6 +260,42 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a286358c9ee1e44c218c5bccb0792e337"></a><!-- doxytag: member="Cluster::getRadius" ref="a286358c9ee1e44c218c5bccb0792e337" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float <a class="el" href="../../d4/dbe/classCluster.html#a286358c9ee1e44c218c5bccb0792e337">Cluster::getRadius</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Returns the cluster radius </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>radius The maximum distance from the centroid <a class="el" href="../../df/dd0/classNode.html">Node</a> to another member of the cluster </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a790a2c7b3a9ec4802b7279f7d0c3ff8d"></a><!-- doxytag: member="Cluster::getStatus" ref="a790a2c7b3a9ec4802b7279f7d0c3ff8d" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="../../d4/dbe/classCluster.html#a790a2c7b3a9ec4802b7279f7d0c3ff8d">Cluster::getStatus</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Returns the active status. True if it has not yet been merged into a posterior cluster, false otherwise </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>status Bool that indicates whether or not the cluster was formed in the "final round" of clustering </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ae491147fb48704715f2d08760fd587d1"></a><!-- doxytag: member="Cluster::setMaxDistance" ref="ae491147fb48704715f2d08760fd587d1" args="(float maxDistance)" -->
 <div class="memitem">
 <div class="memproto">
@@ -237,8 +320,26 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a class="anchor" id="a5761c2a07d9a41d03957dba0ce026200"></a><!-- doxytag: member="Cluster::setStatus" ref="a5761c2a07d9a41d03957dba0ce026200" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="../../d4/dbe/classCluster.html#a5761c2a07d9a41d03957dba0ce026200">Cluster::setStatus</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Changes the status of the cluster, marking it as "new" or already merged into a posterior one </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="../../d9/d2f/cluster_8h_source.html">cluster.h</a></li>
+<li><a class="el" href="../../db/d0d/cluster_8cpp.html">cluster.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div>
@@ -260,7 +361,7 @@ Public Member Functions</h2></td></tr>
     <ul>
       <li class="navelem"><a class="el" href="../../d4/dbe/classCluster.html">Cluster</a>      </li>
 
-    <li class="footer">Generated on Thu Nov 27 2014 17:19:30 for Hierarchical Clustering by
+    <li class="footer">Generated on Sun Nov 30 2014 15:13:44 for Hierarchical Clustering by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>
