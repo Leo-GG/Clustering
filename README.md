@@ -18,8 +18,8 @@ between cluster elements and a list of members are reported.
 
 # TO DO
 
--Allow for full Hierarchical clustering generation, generating a full dendogram
--Distribute the function implementations on main.cpp to separate files
+*Allow for full Hierarchical clustering generation, generating a full dendogram
+*Distribute the function implementations on main.cpp to separate files
 
 
 
