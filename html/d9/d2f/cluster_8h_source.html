@@ -143,16 +143,21 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00084"></a>00084 
 <a name="l00093"></a>00093         <span class="keywordtype">void</span> calcCentroid(vector&lt; vector&lt;float&gt; &gt; normScores);
 <a name="l00094"></a>00094 
-<a name="l00099"></a><a class="code" href="../../d4/dbe/classCluster.html#abcb630832b9df2639e4d12ab0df23d99">00099</a>         shared_ptr&lt;Node&gt; <a class="code" href="../../d4/dbe/classCluster.html#abcb630832b9df2639e4d12ab0df23d99">getCentroid</a>(){<span class="keywordflow">return</span> centroid_;};
-<a name="l00100"></a>00100 
-<a name="l00106"></a><a class="code" href="../../d4/dbe/classCluster.html#a286358c9ee1e44c218c5bccb0792e337">00106</a>         <span class="keywordtype">float</span> <a class="code" href="../../d4/dbe/classCluster.html#a286358c9ee1e44c218c5bccb0792e337">getRadius</a>(){<span class="keywordflow">return</span> radius_;};
-<a name="l00107"></a>00107 
-<a name="l00112"></a><a class="code" href="../../d4/dbe/classCluster.html#a5761c2a07d9a41d03957dba0ce026200">00112</a>         <span class="keywordtype">void</span> <a class="code" href="../../d4/dbe/classCluster.html#a5761c2a07d9a41d03957dba0ce026200">setStatus</a>(){active_=!active_;};
-<a name="l00113"></a>00113 
-<a name="l00120"></a><a class="code" href="../../d4/dbe/classCluster.html#a790a2c7b3a9ec4802b7279f7d0c3ff8d">00120</a>         <span class="keywordtype">bool</span> <a class="code" href="../../d4/dbe/classCluster.html#a790a2c7b3a9ec4802b7279f7d0c3ff8d">getStatus</a>(){<span class="keywordflow">return</span> active_;};
-<a name="l00121"></a>00121 };
-<a name="l00122"></a>00122 
-<a name="l00123"></a>00123 <span class="preprocessor">#endif</span>
+<a name="l00101"></a>00101         <span class="keywordtype">void</span> calcMaxDistance(vector&lt; vector&lt;float&gt; &gt; normScores);
+<a name="l00102"></a>00102 
+<a name="l00107"></a><a class="code" href="../../d4/dbe/classCluster.html#abcb630832b9df2639e4d12ab0df23d99">00107</a>         shared_ptr&lt;Node&gt; <a class="code" href="../../d4/dbe/classCluster.html#abcb630832b9df2639e4d12ab0df23d99">getCentroid</a>(){<span class="keywordflow">return</span> centroid_;};
+<a name="l00108"></a>00108 
+<a name="l00113"></a><a class="code" href="../../d4/dbe/classCluster.html#ab16bdb6d4f23338127af4ab600273b0f">00113</a>         <span class="keywordtype">void</span> <a class="code" href="../../d4/dbe/classCluster.html#ab16bdb6d4f23338127af4ab600273b0f">setCentroid</a>(shared_ptr&lt;Node&gt; A){centroid_=A;}
+<a name="l00114"></a>00114 
+<a name="l00120"></a><a class="code" href="../../d4/dbe/classCluster.html#a286358c9ee1e44c218c5bccb0792e337">00120</a>         <span class="keywordtype">float</span> <a class="code" href="../../d4/dbe/classCluster.html#a286358c9ee1e44c218c5bccb0792e337">getRadius</a>(){<span class="keywordflow">return</span> radius_;};
+<a name="l00121"></a>00121 
+<a name="l00126"></a><a class="code" href="../../d4/dbe/classCluster.html#a5761c2a07d9a41d03957dba0ce026200">00126</a>         <span class="keywordtype">void</span> <a class="code" href="../../d4/dbe/classCluster.html#a5761c2a07d9a41d03957dba0ce026200">setStatus</a>(){active_=!active_;};
+<a name="l00127"></a>00127 
+<a name="l00134"></a><a class="code" href="../../d4/dbe/classCluster.html#a790a2c7b3a9ec4802b7279f7d0c3ff8d">00134</a>         <span class="keywordtype">bool</span> <a class="code" href="../../d4/dbe/classCluster.html#a790a2c7b3a9ec4802b7279f7d0c3ff8d">getStatus</a>(){<span class="keywordflow">return</span> active_;};
+<a name="l00135"></a>00135 
+<a name="l00136"></a>00136 };
+<a name="l00137"></a>00137 
+<a name="l00138"></a>00138 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 </div>
 <!-- window showing the filter options -->
@@ -173,7 +178,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
     <ul>
       <li class="navelem"><a class="el" href="../../d9/d2f/cluster_8h.html">cluster.h</a>      </li>
 
-    <li class="footer">Generated on Sun Nov 30 2014 15:13:43 for Hierarchical Clustering by
+    <li class="footer">Generated on Tue Dec 2 2014 17:06:28 for Hierarchical Clustering by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

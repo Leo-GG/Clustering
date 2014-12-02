@@ -27,20 +27,38 @@ void Cluster::calcCentroid(vector< vector<float> > normScores)
             {
                 float d;
                 d = normScores[members_[i]->getID()][members_[j]->getID()];
-                if (i!=j) {distToNeighbors += d;};
+                //if (i!=j) {distToNeighbors += d;};
                 currentRadius = (d > currentRadius) ? d : currentRadius;
             }
             if (i==0)
             {
-                minDistanceSum=distToNeighbors;
+                minDistanceSum=currentRadius;
                 radius_=currentRadius;
             }
 
-            if (distToNeighbors<minDistanceSum)
+            //if (distToNeighbors<minDistanceSum)
+            if (currentRadius<minDistanceSum)
             {
-                minDistanceSum=distToNeighbors;
+                //minDistanceSum=distToNeighbors;
+                minDistanceSum=currentRadius;
                 centroid_=members_[i];
                 radius_=currentRadius;
             }
         }
 }
+
+void Cluster::calcMaxDistance(vector< vector<float> > normScores)
+{
+    float maxDistance=0;
+    float d;
+    for (int i=0;i<members_.size();i++)
+    {
+        for (int j=0;j<members_.size();j++)
+            {
+                d=normScores[members_[i]->getID()][members_[j]->getID()];
+                maxDistance = d > maxDistance ? d : maxDistance;
+            }
+    }
+    maxDistance_=maxDistance;
+}
+

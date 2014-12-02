@@ -18,7 +18,7 @@ using namespace std::tr1;
  * Represents each cluster generated in the process.
  * It holds a cluster identifier, a pointer to a vector of members,
  * the maximum distance within members of the cluster, the cluster
- * centroid (member with smallest total distance to other members),
+ * centroid (member with smallest max distance to other member),
  * the cluster radius and a boolean flag that indicates whether or not
  * the cluster has been merged into a posterior cluster.
  */
@@ -83,20 +83,34 @@ class Cluster
         void setMaxDistance(float maxDistance){maxDistance_=maxDistance;};
 
         /**
-        * Calculates the cluster centroid as the member whose sum
-        * of distances to all other members is the smallest.
+        * Calculates the cluster centroid as the member whose maxmum
+        * distance to any other member is the smallest.
         * It assigns the value of the cluster radius (from centroid)
-        * in the process
+        * in the process.
         * @param normScores A distance matrix with all the normalized
         *                    distances between members
         */
         void calcCentroid(vector< vector<float> > normScores);
 
         /**
+        * Calculates the maximum distance between any two members of the
+        * cluster.
+        * @param normScores A distance matrix with all the normalized
+        *                    distances between members
+        */
+        void calcMaxDistance(vector< vector<float> > normScores);
+
+        /**
         * Returns a shared pointer to the cluster centroid
         * @return centroid A shared pointer to the centroid Node
         */
         shared_ptr<Node> getCentroid(){return centroid_;};
+
+        /**
+        * Sets the cluster centroid to a new Node
+        * @param centroid A shared pointer to the centroid Node
+        */
+        void setCentroid(shared_ptr<Node> A){centroid_=A;}
 
         /**
         * Returns the cluster radius
@@ -118,6 +132,7 @@ class Cluster
         *               formed in the "final round" of clustering
         */
         bool getStatus(){return active_;};
+
 };
 
 #endif

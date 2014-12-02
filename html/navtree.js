@@ -1,7 +1,7 @@
 var NAVTREE =
 [
   [ "Hierarchical Clustering", "index.html", [
-    [ "Hierarchical Clustering", "index.html", null ],
+    [ "Clustering Tools", "index.html", null ],
     [ "Classes", null, [
       [ "Class List", "annotated.html", "annotated" ],
       [ "Class Index", "classes.html", null ],
