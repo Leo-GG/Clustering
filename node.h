@@ -1,11 +1,12 @@
-#ifndef NODE_H
-#define NODE_H
 /**
  * @file node.h
  * @brief Node class definition
  *
  * Defines the Node class and implements a few inline methods
  */
+
+#ifndef NODE_H
+#define NODE_H
 
 /**
  * @class Node

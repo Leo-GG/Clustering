@@ -1,12 +1,13 @@
-# ifndef LINK_COMPARATOR_H
-# define LINK_COMPARATOR_H
-
 /**
  * @file link_comparator.h
  * @brief LinkComparator class definition
  *
  * Defines the LinkComparator class and implements a few inline methods
  */
+
+
+# ifndef LINK_COMPARATOR_H
+# define LINK_COMPARATOR_H
 
 /**
  * @class LinkComparator

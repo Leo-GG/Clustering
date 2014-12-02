@@ -1,12 +1,12 @@
-# ifndef LINK_H
-# define LINK_H
-
 /**
  * @file link.h
  * @brief Link class definition
  *
  * Defines the Link class and implements a few inline methods
  */
+
+# ifndef LINK_H
+# define LINK_H
 
 /**
  * @class Link

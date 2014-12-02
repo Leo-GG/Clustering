@@ -2,9 +2,13 @@
  * @file cluster.cpp
  * @brief Implementation of methods for Cluster class
  *
- * This file implements the calcCentroid method, which assigns the cluster
- * centroid and the cluster radius. The centroid is defined as the element
- * whose sum of distances to all the other members is the smallest.
+ * This file contains the implementations of the calcCentroid and
+ * calcMaxDistance methods.
+ * calcCentroid assigns the cluster centroid and the cluster radius.
+ * The centroid is defined as the element whose max distances to any
+ * other member is the smallest.
+ * calcMaxDistance calculates the maximum distance between any two two
+ * members of the cluster.
  */
 
 

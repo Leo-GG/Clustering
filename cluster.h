@@ -1,3 +1,10 @@
+/**
+ * @file cluster.h
+ * @brief Cluster class definition
+ *
+ * Defines the Cluster class and implements a few inline methods
+ */
+
 #ifndef CLUSTER_H
 #define CLUSTER_H
 
@@ -6,12 +13,6 @@
 using namespace std;
 using namespace std::tr1;
 
-/**
- * @file cluster.h
- * @brief Cluster class definition
- *
- * Defines the Cluster class and implements a few inline methods
- */
 
 /**
  * @class Cluster

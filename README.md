@@ -19,7 +19,9 @@ between cluster elements and a list of members are reported.
 # TO DO
 
 * Allow for full Hierarchical clustering generation, generating a full dendogram  
-* Distribute the function implementations on main.cpp to separate files
+* Refactor the output generation, currently it is all crumped in main.cpp  
+* Refactor the clustering process  
+* Optimize the SPICKER code (follow comments on the code)  
 
 
 
