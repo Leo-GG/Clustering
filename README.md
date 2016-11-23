@@ -6,11 +6,16 @@ The input is a list of pairwise distances or similarities, with the follwing for
 
 If the distances/similarities are not reciprocal ( d(X-Y) != d(Y-X) ), the program will compute
 the harmonic average and use this value for the clustering. 
-The program can perform two types of clustering:
+The program can perform several types of clustering:
 - Single-linkage hierarchical clustering, stopping when it reaches a pair of
 elements is larger than a given cutoff.   
+- UPGMA clustering, a hierarchical clustering where the average distances between 
+clusters is considered.
+- Complete-linkage clustering, where the distance between each individual pair of 
+elements in different clusters is considered.
 - SPICKER clustering, where the element with the most neighbors within the cutoff is selected
 iteratively as a cluster center with all its neighbors as cluster members.
+- K-means
 
 The output is a list of clusters made below the cutoff that have not been merged into
 a new cluster yet. For each cluster, the clustroid element, radius, maximum distance
